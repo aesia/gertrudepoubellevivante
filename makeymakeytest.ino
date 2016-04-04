@@ -1,7 +1,6 @@
 /**
 *
 * The MIT License (MIT)
-* Copyright (c) <2016> <François Nicaise, Frederic Rorai - AESIA>
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 * and associated documentation files (the "Software"), to deal in the Software without restriction,
 * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
@@ -17,11 +16,7 @@
 #include "Timer.h"
 #include <math.h>
 #include <Adafruit_NeoPixel.h>
-/*
-#ifdef __AVR__
-#include <avr/power.h>
-#endif
-*/
+
 
 #define MAKEYMAKEY_DIGITAL_PIN 5
 #define LOUDNESS_THRESHOLD 1
@@ -36,11 +31,12 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(30, 6, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel rightEye = Adafruit_NeoPixel(12, 5, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel leftEye = Adafruit_NeoPixel(12, 4, NEO_GRB + NEO_KHZ800);
 
-unsigned int sample;
-double maxSignalRecorded = 0.0;
-double volts;
-int score = 0;
-int currentLedIndex = 0;
+
+unsigned int sample;	// loudness to volts
+double maxSignalRecorded = 0.0; // loudness to volts
+double volts; // loudness to volts
+int score = 0; // game score
+int currentLedIndex = 0; // led index
 Timer t;
 int eyesCounter = SECONDS_BEFORE_START;
 boolean isStart = true;
@@ -55,6 +51,7 @@ int yellow[] = { 255,255,0 };
 int orange[] = { 255,149,14 };
 int red[] = { 255,0,0 };
 int currentColor[3] = { 255,255,255 };
+int eyeColor[] = { 87,157,28 };
 
 // thresholds
 #define PURPLE_LEVEL 55
@@ -234,8 +231,8 @@ void blinkEyes() {
 		}
 		else {
 			// show eyes
-			rightEyeDisplay(87, 157, 28);
-			leftEyeDisplay(87, 157, 28);
+			rightEyeDisplay(eyeColor[0], eyeColor[1], eyeColor[2]);
+			leftEyeDisplay(eyeColor[0], eyeColor[1], eyeColor[2]);
 		}
 	}
 }
