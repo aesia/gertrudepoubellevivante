@@ -19,7 +19,7 @@
 
 
 #define MAKEYMAKEY_DIGITAL_PIN 5
-#define LOUDNESS_THRESHOLD 1
+#define LOUDNESS_THRESHOLD 25
 #define SECONDS_BEFORE_START 3
 #define ONE_SECOND 1000
 #define MAXUSEDPIXELS 30
@@ -244,6 +244,7 @@ void blinkEyes() {
 * change colors accordinly
 */
 void checkLevel() {
+	Serial.println(currentLedIndex);
 	if (currentLedIndex > LOUDNESS_THRESHOLD) {
 		score++;
 		if (score >= PURPLE_LEVEL) {
